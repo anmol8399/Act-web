@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/address.js"></script>
+
+    <style>.outer-div{
+        width: 350px;
+       overflow-y: hidden;
+       height: 100px;
+   /*     background: red; */
+       position: relative;
+       overflow-x: scroll;
+   }
+   
+   .inner-div{
+     width:2000px;
+     
+   }
+   
+   
+   .outer-div ul{
+     list-style:none;
+     margin:0;
+     padding:0;
+     display:block;
+   }
+   
+   .outer-div ul li{
+     float:left;
+     margin:10px;
+     height:100px;
+     width:50px; 
+     font-family:'arial';
+     font-size:16px;
+     text-align:center;
+     transition:all 0.5s ease-in-out;
+   }
+   
+   .outer-div ul li span{
+     display:block;
+     color:#8d8d8d;
+     font-family:'arial';
+     font-size:14px;
+     margin:10px 0;
+   }
+   
+   .outer-div ul li.active span{
+     display:block;
+     color:red;
+     font-family:'arial';
+     font-size:18px;
+     margin:5px 0;
+   }
+   
+   .outer-div ul li.active{
+     font-size:26px;
+     width:100px;
+   }
+   
+   /* .circles{
+     width: 86px;
+       height: 86px;
+       position: fixed;
+       z-index: 1000;
+       transform: translateX(138px);
+       border: 3px solid #e48c1e;
+       border-radius: 50%;
+       border-top: none;
+       border-bottom: none;
+   } */
+  </style>
+
+</head>
+<body>
+    
+<div class="outer-div">
+  <!-- add months -->
+  <div class="inner-div">
+   <div class="circles"></div>
+  <ul id="dates">
+    <li>
+       <span id="2020-08-19">Mon</span>
+      01</li>
+    <li>
+      <span>Mon</span>
+      02</li>
+    <li>
+      <span>Mon</span>
+      03</li>
+    <li>
+      <span>Mon</span>
+      04</li>
+    <li>
+      <span>Mon</span>
+      05</li>
+    <li class="active">
+      <span>Mon</span>
+      06</li>
+    <li>
+      <span>Mon</span>
+      07</li>
+    <li>
+      <span>Mon</span>
+      08</li>
+    <li>
+      <span>wed</span>
+      09</li>
+    <li>
+      <span>Mon</span>
+      10</li>
+    <li>
+      <span>Mon</span>
+      11</li>
+  </ul>
+    </div>
+</div>
+
+</body>
+</html>

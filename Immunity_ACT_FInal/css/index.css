@@ -1,0 +1,53 @@
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.card {
+    display: inline-block;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+.container img {
+    width: 94%;
+    height: auto;
+    padding-left: 5%;
+}
+
+.container .btn {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #ff4769;
+    color: white;
+    font-size: 30px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.container .btn:hover {
+    background-color: #ff4769;
+}
+
+.spinner{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    top: 50%;
+    left: 52%;
+    margin-left: -50px;
+    margin-top: -50px;
+    background: url(ajax-loader\ \(1\).gif);
+    background-size: 100%;
+}

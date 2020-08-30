@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/buyNow.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- <h1 id="heading1"></h1> -->
+    <div id="spinner" class="spinner"></div>
+    <img id="myImg" class="cropped1">
+    <!-- <div class="scrolling-wrapper">
+      <div class=" container card"><img id="myImg" width="100%" height="1040" class="cropped1"></div> -->
+    <div style="font-size: 60px;padding-top: 3%;padding-left: 2%;" id="header_1" hidden>Schedule your Program</div>
+    <span id="content_1"
+        style="font-size: 30px;padding-top: 0%;padding-bottom: 5%;padding-left: 2%;color:#808080;" hidden>Starts on Monday ends
+        on
+        Thursday</span>
+    <div style="padding-left: 2%;padding-top: 0%; padding-right: 2%;">
+        <select id="selectNumber" style="border-radius: 50px; font-size: 45px;padding-right: 10px;" class="drop-down" hidden>
+            <option id="default-option" style="font-size: 30px;">Select a Date</option>
+        </select>
+        <br><br>
+
+        <div>
+            <span id="content_2"
+                style="font-size: 40px;padding-top: 0%;padding-bottom: 5%;padding-left: 1%;color:#000;" hidden>Select your
+                time</span>
+
+            
+            <!-- <button id="submit">Create radio buttons</button> -->
+            <form action="/action_page.php" style="padding-left: 1%; position: relative; margin-top: -3.5%;" id="dates_form">
+
+                <!-- <hr><br><label for="0" id="label_0" style="font-size: 25px;"></label>
+                <input  style=" position: absolute; right: 0; margin-top: 8px ;margin-right: 3%;" type="radio" name="0" id="0" value="0"><br><br><hr id="hr_0" hidden><br>
+                <label for="1" id="label_1" style="font-size: 25px;"></label>
+                <input  style=" position: absolute; right: 0; margin-top: 8px ;margin-right: 3%;" type="radio" name="1" id="1" value="1"><br><br><hr id="hr_1" hidden><br>
+                <label for="2" id="label_2" style="font-size: 25px;"></label>
+                <input  style=" position: absolute; right: 0; margin-top: 8px ;margin-right: 3%;" type="radio" name="2" id="2" value="2"><br><br><hr id="hr_2" hidden><br>
+                <label for="3" id="label_3" style="font-size: 25px;"></label>
+                <input  style=" position: absolute; right: 0; margin-top: 8px ;margin-right: 3%;" type="radio" name="3" id="3" value="3"><br><br><hr id="hr_3" hidden><br>
+                <label for="4" id="label_4" style="font-size: 25px;"></label>
+                <input  style=" position: absolute; right: 0; margin-top: 8px ;margin-right: 3%;" type="radio" name="4" id="4" value="4"><br><br><hr id="hr_4" hidden><br> -->
+
+                <script>
+                    const queryString = window.location.search;
+                    console.log(queryString);
+                    const urlParams = new URLSearchParams(queryString);
+                    const product = urlParams.get('product_id');
+                    const product_cat = urlParams.get('product_cat_id');
+                    const auth_token = urlParams.get('u');
+                    console.log('product ID is'+product);
+                    console.log('product Category ID is'+product_cat);
+                    var array = [];
+                    var selectedDateIndex = "";
+                            var selectedTimeIndex = "";
+                    $.post("https://sultry-tax.000webhostapp.com/act_dates.php",
+                        {
+                            action_id: 1,
+                            product_id:product,
+                            product_category_id:product_cat,
+                            authtoken: auth_token
+                        },
+
+
+                        function (data, status) {
+                            array = new Array(1);
+                            console.log("Data: " + data + "\nStatus: " + status);
+                            document.getElementById("spinner").style.display = 'none';
+                            if(product==1){
+                            document.getElementById("myImg").src = "https://protect.immunityhealth.me/product-image/Breath-Free.png";
+                            }else{
+                                document.getElementById("myImg").src = "https://protect.immunityhealth.me/product-image/Breath-Free.png";
+
+                            }
+                            document.getElementById("header_1").style.display = 'block';
+                            document.getElementById("content_1").style.display = 'block';
+                            document.getElementById("selectNumber").style.display = 'block';
+                            document.getElementById("content_2").style.display = 'block';
+                            document.getElementById('footer_').style.display = 'block';
+                            // document.getElementById("content_2").style.display = 'block';
+                            
+                            var dataParsed = JSON.parse(data);
+                            if(dataParsed.dateGroup[0]==null){
+                                alert('No products available');
+                            }
+                            console.log(dataParsed.dateGroup[0]);
+                            var lastIteratedIndex = -1;
+                            for(var i=0;i<dataParsed.dateGroup.length;i++)
+                            {
+                                array[i] = new Array(5);
+                                array[i][0] = dataParsed.dateGroup[i];
+                                var timeSlotsArray = [], idArray = [], zohoIdArray = [];
+                                for(var j=lastIteratedIndex+1,counter =0;j<dataParsed.dateArray.length;j++,counter++)
+                                {
+                                    if(dataParsed.dateArray[j] == dataParsed.dateGroup[i])
+                                    {
+                                        timeSlotsArray[counter] = dataParsed.timeArray[j];
+                                        idArray[counter] = dataParsed.idArray[j];
+                                        zohoIdArray[counter] = dataParsed.zohoIdArray[j];
+                                    }
+                                    else
+                                    {
+                                        lastIteratedIndex = j-1;
+                                        console.log(lastIteratedIndex);
+                                        break;
+                                    }
+                                }
+                                array[i][1] = timeSlotsArray;
+                                array[i][2] = idArray;
+                                array[i][3] = zohoIdArray;
+                            }
+                            console.log(array);
+                            populateSelector();
+                        });
+                        // var dates = [];
+                        function populateSelector() {var time = [];
+                        var ids = [];
+                            console.log(array[0][1]);
+                            for (var i = 0; i < array.length; i++) {
+                                console.log(array[i][0]);
+                                var opt = array[i][0];
+                                var el = document.createElement("option");
+                                document.getElementById('default-option').style.display = 'none';
+                                el.textContent = opt;
+                                el.value = opt;
+                                el.id = i;
+                                if(i==0)
+                                {
+                                    el.selected = true;
+                                }
+                                document.getElementById('selectNumber').appendChild(el);   
+                            }
+
+                                    //document.getElementById('selectNumber').selectedIndex = 0;
+                                
+                            var datesArray;
+                            selectedDateIndex = 0;
+                                document.getElementById('dates_form').innerHTML = "";
+                                var datesArray = array[selectedDateIndex][1];
+                                for (var i = 0; i < datesArray.length; i++) {
+                                    var input = document.createElement("input");
+                                    var label = document.createElement("label");
+                                    label.style.color = "#808080";
+                                    label.onclick = function() {
+                                        input.checked = true;
+                                    };
+                                    var hr = document.createElement("hr");
+                                    var br = document.createElement("br");
+                                    //input.setAttribute("style", "position: absolute; right: 0; margin-top: 8px ;margin-right: 3%;");
+                                    label.setAttribute("for", "date" + i);
+                                    label.innerText = datesArray[i];
+                                    label.style.fontSize = "50px";
+                                    input.setAttribute("type", "radio");
+                                    input.setAttribute("name", "radio");
+                                    input.id = "date" + i;
+                                    input.title = datesArray[i];
+                                    var form = document.getElementById("dates_form");
+                                    form.appendChild(hr);
+                                    form.appendChild(label);
+                                    form.appendChild(input);
+                                }
+
+
+                            document.getElementById('selectNumber').onchange = function () {
+                                // alert($(this). children("option:selected").attr('id'));
+                                selectedDateIndex = $(this).children("option:selected").attr('id');
+                                document.getElementById('dates_form').innerHTML = "";
+                                var datesArray = array[$(this).children("option:selected").attr('id')][1];
+                                for (var i = 0; i < datesArray.length; i++) {
+                                    var input = document.createElement("input");
+                                    var label = document.createElement("label");
+                                    label.style.color = "#808080";
+                                    label.onclick = function() {
+                                        input.checked = true;
+                                    };
+                                    var hr = document.createElement("hr");
+                                    //input.setAttribute("style", "position: absolute; right: 0; margin-top: 8px ;margin-right: 3%;");
+                                    label.setAttribute("for", "date" + i);
+                                    label.innerText = datesArray[i];
+                                    label.style.fontSize = "50px";
+                                    input.setAttribute("type", "radio");
+                                    input.setAttribute("name", "radio");
+                                    input.id = "date" + i;
+                                    input.title = datesArray[i];
+                                    var form = document.getElementById("dates_form");
+                                    form.appendChild(hr);
+                                    form.appendChild(label);
+                                    form.appendChild(input);
+                                }
+                            }
+                            var datesArray = [12, 15, 18];
+}
+
+                            function funct() {
+                                //alert($("input[name='radio']:checked", "#dates_form").attr('id'));
+                                selectedTimeIndex = $("input[name='radio']:checked", "#dates_form").attr('id');
+                                fetchData();
+                            }
+
+                            function fetchData() {
+                                var itemId = array[selectedDateIndex][2][(Number)(selectedTimeIndex.charAt(selectedTimeIndex.length - 1))];
+                                window.location.href = "/address.html?product_id="+product+"&product_cat_id="+product_cat+"&item_id="+itemId+"&u="+auth_token;
+                                // alert(itemId);
+                            }
+
+                </script>
+
+                <!-- <input type="submit" value="Submit"> -->
+            </form>
+        </div>
+    </div>
+    <br><br><br>
+
+
+    <!-- <br><br>
+    <button onclick="goBack()">Go Back</button>
+    <p style="font-size: 40px;"><span id="partner">Partner : </span> <a
+            href="https://www.panchayoga.com/">PanchaYoga</a></p> -->
+    <div id = "footer_" class="footer" hidden>
+        <!-- <button id="buy-now" value="3"><b>Buy Now</b></button> -->
+        <button id="foot-button2" style=" margin-bottom: 5%;width: 80%;border-radius: 40px ;border: 5px solid #ff4769;" onclick="funct();">
+            <div class="loader1" id="loader1"></div><b><span id="savenCont">BUY NOW</span></b>
+        </button>
+        <!-- <p>Footer</p> -->
+    </div>
+    <br><br><br>
+
+
+
+    <script src="/js/buyNow.js"> </script>
+
+</body>
+
+</html>

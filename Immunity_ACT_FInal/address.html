@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='/css/address.css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <!-- <script src='/js/address.js'></script> -->
+</head>
+
+<body>
+  <div id="spinner" class="spinner"></div>
+  <div id="main_body" hidden>
+
+  <h2 style="font-family: 'Playfair Display', serif; padding-left: 20px">Billing Address</h2>
+  <div id="address_card" class="card">
+
+    <div class="container1">
+
+      <div style="padding-left: 70%;">
+      </div>
+
+      <div style="width: 70%; margin-top: -4%;">
+
+        <h2 style="display: inline-block"><b id="name"></b></h2>
+        <br>
+        <div id="contact_info" style="margin-top: -15px; display: inline-block;"></div>
+        <br>
+        <div class="loader" id="loader"></div>
+        <p id="address_line" class="haha" style="margin-top: 5px; display: inline-block"></p>
+        <a class="anchors" id="myAnchor" hidden>HTML</a>
+        <a class="anc" id="address_id_zoho" hidden>HTML</a>
+      </div>
+
+      <img onclick="editAddress()" style="position: absolute;
+            top: 80px;
+            right: 16px;
+            font-size: 18px;
+            margin-top: 0.7%;
+            width : 8%;
+    height: auto;"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAaVBMVEX///8zMzMUFBSurq4qKiojIyMSEhI3Nzc0NDQPDw+zs7O1tbVoaGj4+Pitra1FRUXLy8vJyckICAguLi5JSUnl5eU9PT0ZGRkAAADW1tYeHh5jY2Pu7u5/f394eHiZmZlXV1ff39+/v7/OvF7AAAADDElEQVR4nO2d23LaQBQEJSHkCEU4QYY4gOM4//+RiaCIuQjthaKkOXQ/+sF1umb3jFkenCQAAAAAAAAAAAAAAAAAAAAAAAAAAACjZzt/+/X+c+gp7shbOc3zafF7OfQgd6J+maY7mh/fhp7lLtTPeXrApGK9+hRM09KeYr1q0mPMpbhNTwXT9NWW4vbpXNBYitvmUtDUXbw8onsyK4rLzgRbChuKy/yaoBHFPkET6+Zj3SdoYN18TPsF9VPcrB2C+tX/depUzL4PPeRteCiW9hUfIUXxlw23YpMOPeONuBXX1dAz3ohTsdkMPWIg1ao+/YFLsVkNM2gs1SJ/DlMUM6yyNM1fghS1TmlVtjOHpbieDDNrFFWxHzokxaapu3/ZGDkIBqWo9Blqf0QDU8yEzuhnggEplrNhho3hOEHvFDOhv2famghWfP0zzLAxVIvLgJwHNVMSvEjQI8VSSbDsEnSkqPTZ93SLeqZYmBDsSVHpi4s+waspKj2V9gteSbEQepy5tmR6FddKgp014VDcKAl2FL2Hog4+Ce4Uz9eNCu47KJ6ia4vKpxgiKJlimKCgYqignKL/kjlSVHr6nXnWxAkLoTeZmVfRn5EpCcYkqPSqNou4g/YTLJQEg2viEQTNH1GWzIig6B8ywVLo+8G4O6gkGFX0SoJRRW9d0PwRZcmMiLiiVxKMKnolQe7gIyZovgfNC5o/oiyZEWG+6CfWi35i/Q5OrN/BqASVenBiveijBM0fUZbMiIhKkKIfEdzBh0zQfA+aF1Q6onPrS2ZufclEJahU9HPrRc8dfMgElXpwbr3oowSVjmiSu30uUFoySfJkPMEYQ6Wibwk2FEsw3FDrDrYEGsolGGqo1IMHggwVBYMMBY9oEmSot2R2+BtqJhhgqFb0//E1VE3Q21D0Drb4Geom6Gko2YMHfAylBX0MlY9o4mMovGR2OA3FE3QblvOhJ7wVh2EmL+gw1E/QYWggwX7DwoJg0vEPmWwJ/svwyxVyG4IAAAAAAAAAAAAAAAAAAAAAAAAAAGCbv5f1LA6aN1XtAAAAAElFTkSuQmCC" />
+
+      <img onclick="proceed()" style="position: absolute;
+      top: 130px;
+right: 16px;
+font-size: 18px;
+margin-top: 0.7%;
+width : 8%;
+height: auto;"
+        src="pngguru.com.png" />
+
+
+    </div>
+
+  </div>
+
+
+
+  <div id="editAdd" class="container" style="width: 100%;position: relative;">
+
+    <div id="user-first-name" class="form-group" style="padding-right: 5%; padding-left: 5%;">
+      <!-- field--invalid -->
+      <div class="field__input-container">
+        <input type="text" class="field__input" id="input-name" name="input-name" required autocomplete="on">
+        <label class="field__label" id="username-label" for="input-name" style="color: black;font-family: 'Playfair Display', serif;"><span>Name</span></label>
+        <div class="field__decoration"></div>
+      </div>
+    </div>
+
+    <div id="user-contact-number" class="form-group" style="padding-right: 5%; padding-left: 5%;">
+      <!-- field--invalid -->
+      <div class="field__input-container">
+        <input type="text" class="field__input" id="input-contact-number" name="input-contact-number" required
+          autocomplete="off">
+        <label class="field__label" id="contact-number-label" for="input-contact-number"><span>Contact
+            Number</span></label>
+        <div class="field__decoration"></div>
+      </div>
+    </div>
+
+    <div id="user-address" class="form-group" style="padding-right: 5%; padding-left: 5%;">
+      <!-- field--invalid -->
+      <div class="field__input-container">
+        <input type="text" class="field__input" id="input-address" name="input-address" required autocomplete="off">
+        <label class="field__label" id="address-label" for="input-address"><span>Address</span></label>
+        <div class="field__decoration"></div>
+      </div>
+    </div>
+
+    <div id="user-address-pincode" class="form-group" style="padding-right: 5%; padding-left: 5%;">
+      <!-- field--invalid -->
+      <div class="field__input-container">
+        <input type="text" class="field__input" id="input-pincode" name="input-pincode" required autocomplete="off">
+        <label class="field__label" id="pincode-label" for="input-pincode"><span>Pincode</span></label>
+        <div class="field__decoration"></div>
+      </div>
+    </div>
+
+    <div id="user-address-state" class="form-group" style="padding-right: 5%; padding-left: 5%;">
+      <!-- field--invalid -->
+      <div class="field__input-container">
+        <input type="text" class="field__input" id="input-state" name="input-state" required autocomplete="off">
+        <label class="field__label" id="state-label" for="input-state"><span>State</span></label>
+        <div class="field__decoration"></div>
+      </div>
+    </div>
+
+    <div id="editEmail" class="container" style="width: 100%;position: relative;" >
+      <div id="email" class="form-group" style="padding-right: 5%; padding-left: 5%;">
+        <!-- field--invalid -->
+        <div class="field__input-container">
+          <input type="text" class="field__input" id="input-email" name="input-email" required autocomplete='on'>
+          <label class="field__label" id="username-label" for="input-email" style="color: black;font-family: 'Playfair Display', serif;"><span>Please enter your email to proceed</span></label>
+          <div class="field__decoration"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer">
+      <!-- <button id="buy-now" value="3"><b>Buy Now</b></button> -->
+      <button id="foot-button2" style="  border: 2px solid #ff4769;" onclick="saveAddress()">
+        <div class="loader1" id="loader1"></div><b><span id="savenCont">Save & Continue</span></b>
+      </button>
+      <!-- <p>Footer</p> -->
+    </div>
+  </div>
+
+
+
+  <script src='/js/address.js'></script>
+
+</div>
+
+</body>
+
+</html>

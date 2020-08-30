@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+
+.container {
+  width: 15%;
+}
+.container .form-group {
+  margin: 0 0 16px;
+}
+.container .form-group.field--invalid > .field__input-container .field__decoration:before {
+  border-color: #e4134f;
+  width: 100%;
+}
+.container .form-group .field__input-container {
+  position: relative;
+  margin-bottom: 8px;
+  padding-top: 16px;
+}
+.container .form-group .field__input-container .field__input {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding-top: 20px;
+  padding-bottom: 2px;
+  width: 100%;
+}
+.container .form-group .field__input-container .field__input:focus + .field__label, .container .form-group .field__input-container .field__input:valid + .field__label {
+  font-size: 14px;
+  line-height: 20px;
+  bottom: 50%;
+}
+.container .form-group .field__input-container .field__input:focus ~ .field__decoration:before, .container .form-group .field__input-container .field__input:valid ~ .field__decoration:before {
+  width: 100%;
+}
+.container .form-group .field__input-container .field__input:focus ~ .arrow-down {
+  border-color: transparent;
+}
+.container .form-group .field__input-container .field__input--dropdown {
+  border-color: #000;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.container .form-group .field__input-container .field__input--dropdown + .field__label {
+  color: #000;
+}
+.container .form-group .field__input-container select::-ms-expand {
+  display: none;
+}
+.container .form-group .field__input-container .field__label {
+  color: #848484;
+  font-size: 19px;
+  line-height: 28px;
+  bottom: 2px;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: auto;
+  transition: bottom 0.3s ease, font-size 0.3s ease, line-height 0.3s ease;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+.container .form-group .field__input-container .field__label span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+.container .form-group .field__input-container .field__decoration {
+  border-bottom: 1px solid;
+  border-color: #000;
+}
+.container .form-group .field__input-container .field__decoration:before {
+  display: block;
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  width: 0;
+  border-bottom: 2px solid;
+  border-color: #000;
+  transition: width 0.3s ease, border-color 0.3s ease;
+}
+.container .form-group .field__input-container .arrow-down {
+  position: absolute;
+  right: 0;
+  bottom: 12px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid #000;
+  transition: border-color 0.3s ease;
+  z-index: -1;
+}
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='editAddress.js'></script>
+    <script>
+        $(document).ready(function () {
+
+var nameInput = document.getElementById("input-name");
+var contactInput = document.getElementById("input-contact-number");
+var addressInput = document.getElementById("input-address");
+var pincodeInput = document.getElementById("input-pincode");
+var stateInput = document.getElementById("input-state");
+
+nameInput.style.color = "gray";
+nameInput.onfocus = function() {
+    nameInput.blur();
+}
+
+stateInput.style.color = "gray";
+stateInput.onfocus = function() {
+    stateInput.blur();
+}
+
+contactInput.style.color = "gray";
+contactInput.onfocus = function() {
+    contactInput.blur();
+}
+
+var name = findGetParameter("name");
+var contact = findGetParameter("contact");
+var address = findGetParameter("address");
+
+
+contactInput.value = contact;
+addressInput.value = address;
+
+});
+
+function findGetParameter(parameterName) {
+var result = null,
+    tmp = [];
+location.search
+    .substr(1)
+    .split("&")
+    .forEach(function (item) {
+      tmp = item.split("=");
+      if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
+return result;
+}
+    </script>
+    
+</head>
+<body>
+
+    <div class="container" style="width: 100%;position: relative;">
+  
+        <div id="user-first-name" class="form-group" style="padding-right: 5%; padding-left: 5%;"><!-- field--invalid -->
+          <div class="field__input-container">
+            <input type="text" class="field__input" id="input-name" name="input-name" required value="Anmol Gulati" autocomplete="on">
+            <label class="field__label" id="username-label" for="input-name"><span>Name</span></label>
+            <div class="field__decoration"></div>
+          </div>
+        </div>
+      
+        <div id="user-contact-number" class="form-group" style="padding-right: 5%; padding-left: 5%;"><!-- field--invalid -->
+          <div class="field__input-container">
+            <input type="text" class="field__input" id="input-contact-number" name="input-contact-number" required value="+91 9871369084" autocomplete="off">
+            <label class="field__label" id="contact-number-label" for="input-contact-number"><span>Contact Number</span></label>
+            <div class="field__decoration"></div>
+          </div>
+        </div>
+
+        <div id="user-address" class="form-group" style="padding-right: 5%; padding-left: 5%;"><!-- field--invalid -->
+            <div class="field__input-container">
+              <input type="text" class="field__input" id="input-address" name="input-address" required value="14, Ramakrishnan Marg, Pocket 4, Block E, Rohini Sector 16, New Delhi. 28m from Shri Ram Medicos pin-110089(India)" autocomplete="off">
+              <label class="field__label" id="address-label" for="input-address"><span>Address</span></label>
+              <div class="field__decoration"></div>
+            </div>
+          </div>
+
+          <div id="user-address-pincode" class="form-group" style="padding-right: 5%; padding-left: 5%;"><!-- field--invalid -->
+            <div class="field__input-container">
+              <input type="text" class="field__input" id="input-pincode" name="input-pincode" required value="110089" autocomplete="off">
+              <label class="field__label" id="pincode-label" for="input-pincode"><span>Pincode</span></label>
+              <div class="field__decoration"></div>
+            </div>
+          </div>
+
+          <div id="user-address-state" class="form-group" style="padding-right: 5%; padding-left: 5%;"><!-- field--invalid -->
+            <div class="field__input-container">
+              <input type="text" class="field__input" id="input-state" name="input-state" required value="Delhi" autocomplete="off">
+              <label class="field__label" id="state-label" for="input-state"><span>State</span></label>
+              <div class="field__decoration"></div>
+            </div>
+          </div>
+        
+        <!-- <div id="user-title" class="form-group">field--invalid
+          <div class="field__input-container">
+            <select class="field__input field__input--dropdown" id="input-title" name="input-title" required autocomplete="off">
+              <option selected value="" disabled hidden></option>
+                      <option value="" disabled>Please select</option>
+              <option value="mr">Mr</option>
+              <option value="mrs">Mrs</option>
+              <option value="ms">Ms</option>
+              <option value="dr">Dr</option>
+              <option value="other">Other</option>
+              <option value="prefer not to say">Prefer not to say</option>
+            </select>	
+            <label class="field__label" id="username-label" for="input-title"><span>Title</span></label>
+            <div class="field__decoration"></div>
+                  <div class="arrow-down"></div>
+          </div>
+        </div> -->
+        
+      </div>
+
+</body>
+</html>
